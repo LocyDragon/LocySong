@@ -1,0 +1,5 @@
+money: 1000 #点歌要花费多少钱
+NotFound: &4&lFailed to find that song!:(
+DibbleSuccess: &a&lSuccessfully!-{sum}$
+ShowMusic: {player} >>>> &7[&a{musicname}&7] (Click me and start a music!)
+PlaySuccess: &a&lPlay music {musicname} successfully!

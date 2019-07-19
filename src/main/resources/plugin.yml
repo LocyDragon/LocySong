@@ -1,0 +1,7 @@
+name: LocySong
+main: com.locydragon.song.LocySong
+version: 1.0.0
+author: [LocyDragon]
+depend: [AudioBuffer,Vault]
+commands:
+  ls:
