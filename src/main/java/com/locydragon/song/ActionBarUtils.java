@@ -23,17 +23,15 @@ public class ActionBarUtils {
 		}
 		msg = ChatColor.translateAlternateColorCodes('&', msg);
 		PacketContainer packet = instance.createPacket(PacketType.Play.Server.CHAT);
-		packet.getChatComponents().write(0, WrappedChatComponent.fromJson("{\"text\":\"" + msg + "\"}"));
-		packet.getBytes().write(0, (byte)2);
 		try {
+			packet.getChatComponents().write(0, WrappedChatComponent.fromJson("{\"text\":\"" + msg + "\"}"));
+			packet.getBytes().write(0, (byte)2);
 			instance.sendServerPacket(user, packet);
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
+		} catch (Throwable e) {}
 		tickList.add(user);
 		new Thread(() -> {
 			try {
-				Thread.sleep(1500);
+				Thread.sleep(800);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

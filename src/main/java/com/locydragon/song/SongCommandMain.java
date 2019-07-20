@@ -38,7 +38,7 @@ public class SongCommandMain implements CommandExecutor {
 					LocySong.economy.withdrawPlayer((Player) sender, LocySong.instance.getConfig().getInt("Money", 1000));
 					sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
 							LocySong.config.getString("DibbleSuccess").replace("{player}", sender.getName()).replace("{sum}",
-									String.valueOf(LocySong.instance.getConfig().getInt("Money", 100)))));
+									String.valueOf(LocySong.instance.getConfig().getInt("Money", 1000)))));
 					TextComponent message = new TextComponent(ChatColor.translateAlternateColorCodes('&',
 							LocySong.config.getString("ShowMusic").replace("{musicname}", args[1]).replace("{player}", sender.getName())));
 					message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/ls play " + args[1]));
@@ -109,7 +109,6 @@ public class SongCommandMain implements CommandExecutor {
 			}
 			JSONObject jsonOut = result.getJSONArray("songs").getJSONObject(0);
 			int musicID = jsonOut.getInteger("id");
-			AudioBufferAPI.playForByParam(who, "[Net]http://music.163.com/song/media/outer/url?id=" + musicID +".mp3");
 			who.sendMessage(ChatColor.translateAlternateColorCodes('&',
 					LocySong.config.getString("PlaySuccess").replace("{musicname}", musicName)));
 			if (LineAsyncRunnable.runnableList.getOrDefault(who, null) != null) {
@@ -124,7 +123,7 @@ public class SongCommandMain implements CommandExecutor {
 				BufferedReader in = new BufferedReader(new InputStreamReader(yc.getInputStream(), "UTF-8"));
 				String inputline = null;
 				while ((inputline = in.readLine()) != null) {
-					json2.append(inputline);
+					json2.append(java.net.URLDecoder.decode(inputline, "utf-8"));
 				}
 				in.close();
 			} catch (Exception e) {
@@ -137,6 +136,7 @@ public class SongCommandMain implements CommandExecutor {
 			LineAsyncRunnable runnable = new LineAsyncRunnable(who, lines);
 			LineAsyncRunnable.runnableList.put(who, runnable);
 			runnable.start();
+			AudioBufferAPI.playForByParam(who, "[Net]http://music.163.com/song/media/outer/url?id=" + musicID +".mp3");
 		});
 	}
 }
