@@ -1,5 +1,8 @@
 money: 1000 #点歌要花费多少钱
-NotFound: &4&lFailed to find that song!:(
-DibbleSuccess: &a&lSuccessfully!-{sum}$
-ShowMusic: {player} >>>> &7[&a{musicname}&7] (Click me and start a music!)
-PlaySuccess: &a&lPlay music {musicname} successfully!
+CDTime: 10
+NotFound: "&4&lFailed to find that song!:("
+DibbleSuccess: "&a&lSuccessfully play a song for everyone!-{sum}$"
+ShowMusic: "&7{player} >>>> &7[&a{musicname}&7] (Click me and start a music!)"
+PlaySuccess: "&a&lPlay music {musicname} successfully!"
+NoEnoughMoney: "&4&lNo enough money!Sir!"
+CoolDown: "&b&lJust wait a minute……"
