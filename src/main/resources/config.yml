@@ -1,4 +1,4 @@
-money: 1000 #点歌要花费多少钱
+Money: 1000 #点歌要花费多少钱
 CDTime: 10
 NotFound: "&4&lFailed to find that song!:("
 DibbleSuccess: "&a&lSuccessfully play a song for everyone!-{sum}$"

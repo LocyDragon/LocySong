@@ -27,6 +27,9 @@ public class SongCommandMain implements CommandExecutor {
 	public static List<Player> inWait = new ArrayList<>();
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
+		if (args.length <= 0) {
+			return false;
+		}
 		if (args[0].equalsIgnoreCase("reload") && sender.isOp()) {
 			LocySong.instance.reloadConfig();
 			LocySong.config = LocySong.instance.getConfig();
@@ -102,7 +105,7 @@ public class SongCommandMain implements CommandExecutor {
 			}
 			JSONObject jsonMe = JSON.parseObject(json.toString());
 			JSONObject result = jsonMe.getJSONObject("result");
-			if (result.getInteger("songCount") == 0) {
+			if (result == null || result.getInteger("songCount") == 0) {
 				who.sendMessage(ChatColor.translateAlternateColorCodes('&',
 						LocySong.config.getString("NotFound")));
 				return;
@@ -130,7 +133,8 @@ public class SongCommandMain implements CommandExecutor {
 				e.printStackTrace();
 			}
 			String lines = JSON.parseObject(json2.toString()).getString("lyric");
-			if (!(lines.contains("[") && lines.contains("]"))) {
+			if (lines == null ||  !(lines.contains("[") && lines.contains("]"))) {
+				AudioBufferAPI.playForByParam(who, "[Net]http://music.163.com/song/media/outer/url?id=" + musicID +".mp3");
 				return;
 			}
 			LineAsyncRunnable runnable = new LineAsyncRunnable(who, lines);

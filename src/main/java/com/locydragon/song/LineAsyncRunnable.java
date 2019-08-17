@@ -20,6 +20,7 @@ public class LineAsyncRunnable extends Thread {
 	String lastLine = null;
 	Long nowTick = 0L;
 	Player listener;
+	long largest = 0L;
 	public LineAsyncRunnable(Player who, String lines) {
 		this.lines.addAll(Arrays.asList(lines.split(Pattern.quote("\n"))));
 		for (String object : this.lines) {
@@ -57,6 +58,9 @@ public class LineAsyncRunnable extends Thread {
 			}
 		}
 		this.listener = who;
+		Long[] numbers = timeTickLine.keySet().toArray(new Long[timeTickLine.size()]);
+		Arrays.sort(numbers);
+		this.largest = numbers[numbers.length - 1];
 	}
 
 	@Override
@@ -77,6 +81,9 @@ public class LineAsyncRunnable extends Thread {
 				}
 				if (this.lastLine != null) {
 					ActionBarUtils.sendActionBar(this.listener, ChatColor.AQUA + this.lastLine);
+					if (this.nowTick >= this.largest) {
+						this.stopMe();
+					}
 				}
 			});
 		}
